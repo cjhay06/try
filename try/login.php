@@ -34,6 +34,7 @@
 				</div>
 			</div>
 			<div class="card-body">
+
 				<form method="POST" id="logform">
 		<div id="msg_login"></div>
                <div class="">
@@ -51,6 +52,7 @@
                           <div class="alert alert-success" id="alerttext3"></div>
                      </div>
                </div>
+               
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -130,7 +132,7 @@
 
                                 $('#myalert3').slideDown();
                                 $('#alerttext3').html(data);
-                                $('#alerttext3').html('<i class="fa fa-check"></i> Login Successful. User Verified!');
+                                $('#alerttext3').html('<i class="fa fa-check"></i> Login Successful. Admin Verified!');
                                 $('#login-button').text('Login');
                                 $('#logform')[0].reset();
                                 $('#myalert').hide();
@@ -138,7 +140,7 @@
                                 $('#myalert2').hide();
                                 $('#alerttext2').hide();
                                 setTimeout(function() {
-                                    window.location = './user/home.php';
+                                    window.location = './admin/home';
                                 }, 1000);
                             }  else if (data == 2) {
 
@@ -152,9 +154,27 @@
                                 $('#myalert2').hide();
                                 $('#alerttext2').hide();
                                 setTimeout(function() {
-                                    window.location = './user/home.php';
+                                    window.location = './user/home';
                                 }, 1000);
-                            } else {
+                            }
+
+                            else if (data == 3) {
+
+                                $('#myalert3').slideDown();
+                                $('#alerttext3').html(data);
+                                $('#alerttext3').html('<i class="fa fa-check"></i> Login Successful. Respondent Verified!');
+                                $('#login-button').text('Login');
+                                $('#logform')[0].reset();
+                                $('#myalert').hide();
+                                $('#alerttext').hide();
+                                $('#myalert2').hide();
+                                $('#alerttext2').hide();
+                                setTimeout(function() {
+                                    window.location = './respondent/home';
+                                }, 1000);
+                            }
+
+                             else {
                                 $('#myalert').slideDown();
                                 $('#alerttext').html(data);
                                 $('#logtext').text('Login');

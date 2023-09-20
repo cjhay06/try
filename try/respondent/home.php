@@ -2,15 +2,15 @@
    session_start();
   require_once "../config/sampleclass.php";
 
-  if(!isset($_SESSION['logged_in2'])){
+  if(!isset($_SESSION['logged_in3'])){
      
      header("location:index.php");
 
   }else{
    
      $conn = new class_php();
-    $getsessionID = trim($_SESSION['userid2']);
-    $user = $conn->fetch_usersessionId($getsessionID);
+    $getsessionID = trim($_SESSION['userid3']);
+    $respondent = $conn->fetch_ressessionId($getsessionID);
   
 
   }
@@ -50,7 +50,7 @@
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><span>Welcome! <?php foreach ($user as  $row){echo ''. $row['firstname'];}; ?></span><i class="fas fa-user fa-fw"></i></a>
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><span>Welcome! <?php foreach ($respondent as  $row){echo ''. $row['firstname'];}; ?></span><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#!">My Profile</a></li>
                         <li><a class="dropdown-item" href="#!">Change Password</a></li>

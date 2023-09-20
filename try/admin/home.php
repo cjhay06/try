@@ -2,15 +2,16 @@
    session_start();
   require_once "../config/sampleclass.php";
 
-  if(!isset($_SESSION['logged_in2'])){
+  if(!isset($_SESSION['logged_in'])){
      
      header("location:index.php");
 
   }else{
    
-     $conn = new class_php();
-    $getsessionID = trim($_SESSION['userid2']);
-    $user = $conn->fetch_usersessionId($getsessionID);
+    $conn = new class_php();
+    
+    $getsessionID = trim($_SESSION['userid']);
+    $admin = $conn->fetch_adminsessionId($getsessionID);
   
 
   }
@@ -38,7 +39,7 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">User Dashboard</a>
+            <a class="navbar-brand ps-3" href="index.html">Admin Dashboard</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -50,7 +51,7 @@
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><span>Welcome! <?php foreach ($user as  $row){echo ''. $row['firstname'];}; ?></span><i class="fas fa-user fa-fw"></i></a>
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><span>Welcome! <?php foreach ($admin as  $row){echo ''. $row['firstname'];}; ?></span><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#!">My Profile</a></li>
                         <li><a class="dropdown-item" href="#!">Change Password</a></li>
@@ -74,6 +75,14 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Category
                             </a>
+                            
+                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+
+
+
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
@@ -100,6 +109,7 @@
                             </div>
                         </div>
                     </div>
+ <?php include "modal.php";?>
                     <div class="col-xl-3 col-md-6">
                         <div class="card bg-warning text-white mb-4">
                             <div class="card-body">Warning Card</div>

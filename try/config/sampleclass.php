@@ -60,6 +60,10 @@ require 'connection.php';
               $stmt2->execute(array(':umail' => $emailaddress, ':upass' => $password, ':urole' => 'User' ));
               $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
 
+              $stmt3 = $this->pdo->prepare("SELECT * FROM `tbl_user` WHERE `email` = :umail AND `password` = :upass AND `role` = :urole");
+              $stmt3->execute(array(':umail' => $emailaddress, ':upass' => $password, ':urole' => 'respondent' ));
+              $row3 = $stmt3->fetch(PDO::FETCH_ASSOC);
+
 
               if($stmt1->rowCount() > 0){
                 $_SESSION['userid'] = htmlentities($row['id']);
@@ -69,6 +73,11 @@ require 'connection.php';
                 $_SESSION['userid2'] = htmlentities($row2['id']);
                 $_SESSION['logged_in2'] = true;
                 echo '2';
+
+              }else if($stmt3->rowCount() > 0){
+                $_SESSION['userid3'] = htmlentities($row3['id']);
+                $_SESSION['logged_in3'] = true;
+                echo '3';
                 
                 exit();
               }else{
@@ -79,7 +88,44 @@ require 'connection.php';
        //end login
 
    
+   // get session ID for admin
+
+          public function fetch_adminsessionId($getsessionID){
+             
+               $query = $this->pdo->prepare("SELECT * FROM `tbl_user` WHERE `id` =  ?");
+               $query->execute([$getsessionID]);
+               return $query->fetchAll();
 
 
-  }
+          }
+
+  
+
+
+    // get session ID for User
+
+          public function fetch_usersessionId($getsessionID){
+             
+               $query = $this->pdo->prepare("SELECT * FROM `tbl_user` WHERE `id` =  ?");
+               $query->execute([$getsessionID]);
+               return $query->fetchAll();
+
+
+          }
+    // end get session ID for User 
+
+
+    // get session ID for respondent
+
+          public function fetch_ressessionId($getsessionID){
+             
+               $query = $this->pdo->prepare("SELECT * FROM `tbl_user` WHERE `id` =  ?");
+               $query->execute([$getsessionID]);
+               return $query->fetchAll();
+
+
+          }
+    // end get session ID for respondent 
+
+}
  ?>
