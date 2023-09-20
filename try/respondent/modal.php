@@ -298,7 +298,7 @@ last_name             }else if(last_name === ""){
 
                  $.ajax({
 
-                         url: '../config/add_admin.php',
+                         url: '../config/add_respondent.php',
                           type: "POST",
                           data: data,
                           processData: false,

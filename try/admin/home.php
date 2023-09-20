@@ -77,7 +77,7 @@
                             </a>
                             
                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
+  Add Admin
 </button>
 
 
@@ -87,7 +87,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        User
+                        Admin
                     </div>
                 </nav>
             </div>

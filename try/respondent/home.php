@@ -38,7 +38,7 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">User Dashboard</a>
+            <a class="navbar-brand ps-3" href="index.html">Respondent Dashboard</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -74,11 +74,15 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Category
                             </a>
+
+                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Add Respondent
+</button>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        User
+                        Respondent
                     </div>
                 </nav>
             </div>
@@ -109,6 +113,7 @@
                             </div>
                         </div>
                     </div>
+                     <?php include "modal.php";?>
                     <div class="col-xl-3 col-md-6">
                         <div class="card bg-success text-white mb-4">
                             <div class="card-body">Success Card</div>

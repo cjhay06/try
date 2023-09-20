@@ -52,15 +52,17 @@ require 'connection.php';
 
              session_start();
 
-              $stmt1 = $this->pdo->prepare("SELECT * FROM `tbl_user` WHERE `email` = :umail AND `password` = :upass AND `role` = :urole");
+             //login admin
+
+              $stmt1 = $this->pdo->prepare("SELECT * FROM `tbl_admin` WHERE `email` = :umail AND `password` = :upass AND `role` = :urole");
               $stmt1->execute(array(':umail' => $emailaddress, ':upass' => $password, ':urole' => 'Admin' ));
               $row = $stmt1->fetch(PDO::FETCH_ASSOC);
-
+                //login user
               $stmt2 = $this->pdo->prepare("SELECT * FROM `tbl_user` WHERE `email` = :umail AND `password` = :upass AND `role` = :urole");
               $stmt2->execute(array(':umail' => $emailaddress, ':upass' => $password, ':urole' => 'User' ));
               $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
-
-              $stmt3 = $this->pdo->prepare("SELECT * FROM `tbl_user` WHERE `email` = :umail AND `password` = :upass AND `role` = :urole");
+               //login respondent
+              $stmt3 = $this->pdo->prepare("SELECT * FROM `tbl_respondent` WHERE `email` = :umail AND `password` = :upass AND `role` = :urole");
               $stmt3->execute(array(':umail' => $emailaddress, ':upass' => $password, ':urole' => 'respondent' ));
               $row3 = $stmt3->fetch(PDO::FETCH_ASSOC);
 
@@ -92,7 +94,7 @@ require 'connection.php';
 
           public function fetch_adminsessionId($getsessionID){
              
-               $query = $this->pdo->prepare("SELECT * FROM `tbl_user` WHERE `id` =  ?");
+               $query = $this->pdo->prepare("SELECT * FROM `tbl_admin` WHERE `id` =  ?");
                $query->execute([$getsessionID]);
                return $query->fetchAll();
 
@@ -127,5 +129,45 @@ require 'connection.php';
           }
     // end get session ID for respondent 
 
+
+
+           // registration for admin
+          public function add_admin($fullname,$middlename,$lastname, $emailaddress, $username, $password){
+
+                   $role = "admin";
+
+                   $stmt = $this->pdo->prepare("INSERT INTO `tbl_admin` (`firstname`,`middlename`,`lastname`, `email`, `username`, `password`, `role`)VALUES(?,?,?,?,?,?,?)");
+                   $true = $stmt->execute([$fullname,$middlename,$lastname, $emailaddress, $username, $password, $role]);
+                  if($true == true){
+                     return true;
+                   }else{
+                      return false;
+             }
+
+          }
+
+        // end registration for admin
+
+
+
+           // registration for Respondent
+          public function add_respondent($fullname,$middlename,$lastname, $emailaddress, $username, $password){
+
+                   $role = "respondent";
+
+                   $stmt = $this->pdo->prepare("INSERT INTO `tbl_respondent` (`firstname`,`middlename`,`lastname`, `email`, `username`, `password`, `role`)VALUES(?,?,?,?,?,?,?)");
+                   $true = $stmt->execute([$fullname,$middlename,$lastname, $emailaddress, $username, $password, $role]);
+                  if($true == true){
+                     return true;
+                   }else{
+                      return false;
+             }
+
+          }
+
+        // end registration for Respondent
+
 }
+
+
  ?>
