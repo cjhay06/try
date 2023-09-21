@@ -74,6 +74,7 @@
            <div class="card-body">
              <form method="POST">
               <div id="msg"></div>
+              <div id="error"></div>
 
               <div class="form-group">
                  <label>First Name</label>
@@ -190,12 +191,7 @@
               console.log(password);
 
 
-          function isValidFullname(){
-             
-            
-
-
-
+          function isValidFullname(){            
              var pattern = /^[a-z A-Z ]+$/;
              var full_name = $("#full_name").val();
              if(pattern.test(full_name) && full_name !== ""){
@@ -425,6 +421,6 @@ last_name             }else if(last_name === ""){
   </script>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> 
   </body>
 </html>

@@ -32,17 +32,30 @@ require 'connection.php';
           // registration
           public function add_user($fullname,$middlename,$lastname, $emailaddress, $username, $password){
 
-                   $role = "user";
+             $stmt = $this->pdo->prepare("SELECT * FROM tbl_user WHERE email = ?");
 
+
+           $stmt->execute([$emailaddress]);
+           $result = $stmt->rowCount();
+           if ($result > 0 ) {
+            echo "<div class='alert alert-danger' role='alert' id='error'>email already exist</div>";
+             // code...
+           }
+
+                
+            else { 
+                   $role = "user";
                    $stmt = $this->pdo->prepare("INSERT INTO `tbl_user` (`firstname`,`middlename`,`lastname`, `email`, `username`, `password`, `role`)VALUES(?,?,?,?,?,?,?)");
                    $true = $stmt->execute([$fullname,$middlename,$lastname, $emailaddress, $username, $password, $role]);
                   if($true == true){
                    	 return true;
+
                    }else{
                    	  return false;
              }
 
           }
+        }
 
         // end registration
 
@@ -54,8 +67,8 @@ require 'connection.php';
 
              //login admin
 
-              $stmt1 = $this->pdo->prepare("SELECT * FROM `tbl_admin` WHERE `email` = :umail AND `password` = :upass AND `role` = :urole");
-              $stmt1->execute(array(':umail' => $emailaddress, ':upass' => $password, ':urole' => 'Admin' ));
+              $stmt1 = $this->pdo->prepare("SELECT * FROM `tbl_admin` WHERE `email` = :umail AND `password` = :upass AND `role` = :urole" );
+              $stmt1->execute(array(':umail' => $emailaddress,':upass' => $password, ':urole' => 'Admin' ));
               $row = $stmt1->fetch(PDO::FETCH_ASSOC);
                 //login user
               $stmt2 = $this->pdo->prepare("SELECT * FROM `tbl_user` WHERE `email` = :umail AND `password` = :upass AND `role` = :urole");
@@ -121,7 +134,7 @@ require 'connection.php';
 
           public function fetch_ressessionId($getsessionID){
              
-               $query = $this->pdo->prepare("SELECT * FROM `tbl_user` WHERE `id` =  ?");
+               $query = $this->pdo->prepare("SELECT * FROM `tbl_respondent` WHERE `id` =  ?");
                $query->execute([$getsessionID]);
                return $query->fetchAll();
 
